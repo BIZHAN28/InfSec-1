@@ -294,7 +294,7 @@ if (!passwordEncoder.matches(password, user.getPasswordHash())) {
 
 ### OWASP Dependency-Check (SCA) отчет
 
-Отчет доступен в разделе "Actions" репозитория после успешного запуска pipeline. Файл: `dependency-check-report/dependency-check-report.html`
+![screenshot](docs/Dependency.png)
 
 ---
 
