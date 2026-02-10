@@ -51,8 +51,8 @@ jobs:
       run: |
         mvn org.owasp:dependency-check-maven:check \
           -Dnvd.api.key=$NVD_API_KEY \
-          -Dossindex.user=$OSSINDEX_USER \
-          -Dossindex.token=$OSSINDEX_TOKEN
+          -DossIndexUsername=$OSSINDEX_USER \
+          -DossIndexPassword=$OSSINDEX_TOKEN
       continue-on-error: true
       
     - name: Generate Dependency-Check report
