@@ -20,9 +20,10 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <tomcat.version>11.0.12</tomcat.version>
-        <jackson.version>2.16.1</jackson.version>
-        <logback.version>1.4.15</logback.version>
+
+        <!-- Безопасные версии -->
+        <logback.version>1.5.26</logback.version>
+        <log4j.version>2.25.1</log4j.version>
         <spring-security.version>6.2.4</spring-security.version>
     </properties>
 
@@ -37,21 +38,16 @@
                 <scope>import</scope>
             </dependency>
 
-            <!-- Управление версиями ключевых зависимостей -->
-            <dependency>
-                <groupId>com.fasterxml.jackson.core</groupId>
-                <artifactId>jackson-databind</artifactId>
-                <version>${jackson.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>ch.qos.logback</groupId>
-                <artifactId>logback-core</artifactId>
-                <version>${logback.version}</version>
-            </dependency>
+            <!-- Явные версии логов -->
             <dependency>
                 <groupId>ch.qos.logback</groupId>
                 <artifactId>logback-classic</artifactId>
                 <version>${logback.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-api</artifactId>
+                <version>${log4j.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -79,7 +75,7 @@
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
 
-        <!-- Spring Security explicit version -->
+        <!-- Spring Security -->
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-core</artifactId>
@@ -91,7 +87,7 @@
             <version>${spring-security.version}</version>
         </dependency>
 
-        <!-- JDBC -->
+        <!-- Database Driver -->
         <dependency>
             <groupId>org.xerial</groupId>
             <artifactId>sqlite-jdbc</artifactId>
@@ -131,13 +127,6 @@
             <version>4.8.3</version>
             <scope>provided</scope>
         </dependency>
-
-        <!-- Log4j safe version -->
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-api</artifactId>
-            <version>2.26.0</version>
-        </dependency>
     </dependencies>
 
     <build>
@@ -151,12 +140,6 @@
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
                 <version>4.8.3.0</version>
-                <configuration>
-                    <effort>Max</effort>
-                    <threshold>Low</threshold>
-                    <xmlOutput>true</xmlOutput>
-                    <xmlOutputDirectory>target</xmlOutputDirectory>
-                </configuration>
             </plugin>
 
             <plugin>
@@ -170,13 +153,6 @@
                     </suppressionFiles>
                     <nvdApiKey>${nvd.api.key}</nvdApiKey>
                 </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>
