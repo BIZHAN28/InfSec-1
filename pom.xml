@@ -23,7 +23,7 @@
 
         <logback.version>1.5.26</logback.version>
         <log4j.version>2.25.1</log4j.version>
-        <spring-security.version>6.2.4</spring-security.version>
+        <spring-security.version>6.2.7</spring-security.version>
         <lombok.version>1.18.30</lombok.version>
     </properties>
 
