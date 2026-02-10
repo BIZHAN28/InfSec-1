@@ -21,9 +21,9 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <tomcat.version>11.0.12</tomcat.version>
         <jackson.version>2.16.1</jackson.version>
-        <logback.version>1.4.14</logback.version>
-        <spring.version>6.1.21</spring.version>
-        <spring-security.version>6.2.2</spring-security.version>
+        <logback.version>1.4.15</logback.version>
+        <spring.version>6.1.27</spring.version>
+        <spring-security.version>6.2.4</spring-security.version>
     </properties>
 
     <dependencyManagement>
@@ -155,6 +155,12 @@
             <version>4.8.3</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+             <groupId>org.apache.logging.log4j</groupId>
+             <artifactId>log4j-api</artifactId>
+             <version>2.26.0</version>
+         </dependency>
+
     </dependencies>
 
     <build>
