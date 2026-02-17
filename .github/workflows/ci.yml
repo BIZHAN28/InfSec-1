@@ -58,12 +58,13 @@ jobs:
     - name: Generate Dependency-Check report
       env:
         NVD_API_KEY: ${{ secrets.NVD_API_KEY }}
+        OSSINDEX_USER: ${{ secrets.OSSINDEX_USER }}
+        OSSINDEX_TOKEN: ${{ secrets.OSSINDEX_TOKEN }}
       run: |
-        if [ -n "$NVD_API_KEY" ]; then
-          mvn org.owasp:dependency-check-maven:aggregate -Dnvd.api.key=$NVD_API_KEY
-        else
-          mvn org.owasp:dependency-check-maven:aggregate
-        fi
+        mvn org.owasp:dependency-check-maven:aggregate \
+          -Dnvd.api.key=$NVD_API_KEY \
+          -DossIndexUsername=$OSSINDEX_USER \
+          -DossIndexPassword=$OSSINDEX_TOKEN
       continue-on-error: true
       
     - name: Upload Dependency-Check report
