@@ -22,14 +22,15 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <logback.version>1.5.26</logback.version>
-        <log4j.version>2.25.1</log4j.version>
-        <spring-security.version>6.2.7</spring-security.version>
+        <!-- ОБНОВЛЕНО: log4j.version с 2.25.1 до 2.25.3 для устранения CVE-2025-68161 -->
+        <log4j.version>2.25.3</log4j.version>
+        <!-- УДАЛЕНО: spring-security.version - управляется Spring Boot -->
         <lombok.version>1.18.30</lombok.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
-            <!-- Spring Boot BOM -->
+            <!-- Spring Boot BOM уже импортируется через parent, но оставим для явности -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
@@ -44,9 +45,16 @@
                 <artifactId>logback-classic</artifactId>
                 <version>${logback.version}</version>
             </dependency>
+            <!-- ОБНОВЛЕНО: теперь используется безопасная версия 2.25.3 -->
             <dependency>
                 <groupId>org.apache.logging.log4j</groupId>
                 <artifactId>log4j-api</artifactId>
+                <version>${log4j.version}</version>
+            </dependency>
+            <!-- ДОБАВЛЕНО: явное управление версией log4j-core на случай транзитивных зависимостей -->
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-core</artifactId>
                 <version>${log4j.version}</version>
             </dependency>
         </dependencies>
@@ -75,17 +83,9 @@
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
 
-        <!-- Spring Security -->
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-core</artifactId>
-            <version>${spring-security.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-web</artifactId>
-            <version>${spring-security.version}</version>
-        </dependency>
+        <!-- Spring Security - версии управляются Spring Boot, отдельные зависимости не нужны -->
+        <!-- УДАЛЕНЫ отдельные зависимости spring-security-core и spring-security-web 
+             так как они уже включены в spring-boot-starter-security -->
 
         <!-- Database Driver -->
         <dependency>
